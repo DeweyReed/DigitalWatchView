@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DigitalWatchView">
+        <attr name="dwv_show_background" format="boolean" />
+        <attr name="dwv_background_color" format="color" />
+        <attr name="dwv_background_alpha" format="float" />
+
+        <attr name="dwv_foreground_color" format="color" />
+        <attr name="dwv_normal_text_size" format="dimension" />
+
+        <attr name="dwv_show_seconds" format="boolean" />
+        <attr name="dwv_seconds_text_size" format="dimension" />
+
+        <attr name="dwv_show_hours" format="boolean" />
+        <attr name="dwv_show_two_digits" format="boolean" />
+
+        <attr name="dwv_hours" format="integer" />
+        <attr name="dwv_minutes" format="integer" />
+        <attr name="dwv_seconds" format="integer" />
+
+        <attr name="dwv_blink_colons" format="boolean" />
+    </declare-styleable>
+</resources>
