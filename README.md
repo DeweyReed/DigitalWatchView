@@ -25,6 +25,9 @@ dependencies {
 ```
 [![](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
 
+## Try
+Download a sample APK [here](https://github.com/DeweyReed/DigitalWatchView/releases/download/1.0/sample.apk)
+
 ## Attributes
 
 |xml|method|type|default|meaning|
