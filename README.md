@@ -1,8 +1,9 @@
 # DigitalWatchView
 [:cn:](https://github.com/DeweyReed/DigitalWatchView/blob/master/README-ZH.md#scrollhmspicker)
+
 Just looks like your digital watch.
 
-![In the XML](https://github.com/DeweyReed/DigitalWatchView/blob/master/art/preview.png?raw=true)
+![In the XML](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.png?raw=true)
 
 ## Install
 Step 1. Add the JitPack repository to your build file

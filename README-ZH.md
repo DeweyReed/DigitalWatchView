@@ -1,7 +1,7 @@
 # DigitalWatchView
 电子表控件
 
-![In the XML](https://github.com/DeweyReed/DigitalWatchView/blob/master/art/preview.png?raw=true)
+![In the XML](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.png?raw=true)
 
 ## 安装
 Step 1. 在根build.gradle添加jitpack.io:
