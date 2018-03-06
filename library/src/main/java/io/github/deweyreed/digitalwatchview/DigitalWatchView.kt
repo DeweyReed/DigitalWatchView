@@ -24,42 +24,57 @@ class DigitalWatchView @JvmOverloads constructor(
     private val backgroundView: DigitalView
     private val foregroundView: DigitalView
 
+    private var showBackground = false
+    @ColorInt
+    private var backgroundColorInt = -1
+    private var backgroundAlpha = 1f
+    @ColorInt
+    private var foregroundColorInt = -1
+    private var normalTextSize = 1f
+    private var showSeconds = true
+    private var secondsTextSize = 1f
+    private var showHours = true
+    private var showTwoDigits = true
+    private var hours = 0
+    private var minutes = 0
+    private var seconds = 0
+
     private var blinkColons: Boolean
     private var blinkRunnable: BlinkRunnable? = null
 
     init {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.DigitalWatchView, 0, 0)
-        val showBackground = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_background,
+        showBackground = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_background,
                 false)
-        val backgroundColor = ta.getColor(R.styleable.DigitalWatchView_dwv_background_color,
+        backgroundColorInt = ta.getColor(R.styleable.DigitalWatchView_dwv_background_color,
                 color(android.R.color.darker_gray))
-        val backgroundAlpha = ta.getFloat(R.styleable.DigitalWatchView_dwv_background_alpha,
+        backgroundAlpha = ta.getFloat(R.styleable.DigitalWatchView_dwv_background_alpha,
                 1f)
-        val foregroundColor = ta.getColor(R.styleable.DigitalWatchView_dwv_foreground_color,
+        foregroundColorInt = ta.getColor(R.styleable.DigitalWatchView_dwv_foreground_color,
                 color(android.R.color.holo_green_dark))
-        val normalTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_normal_text_size,
+        normalTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_normal_text_size,
                 sp(18).toFloat())
-        val showSeconds = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_seconds,
+        showSeconds = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_seconds,
                 true)
-        val secondsTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_seconds_text_size,
+        secondsTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_seconds_text_size,
                 sp(18).toFloat())
-        val showHours = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_hours,
+        showHours = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_hours,
                 true)
-        val showTwoDigits = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_two_digits,
+        showTwoDigits = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_two_digits,
                 true)
-        val hours = ta.getInteger(R.styleable.DigitalWatchView_dwv_hours, 0)
-        val minutes = ta.getInteger(R.styleable.DigitalWatchView_dwv_minutes, 0)
-        val seconds = ta.getInteger(R.styleable.DigitalWatchView_dwv_seconds, 0)
+        hours = ta.getInteger(R.styleable.DigitalWatchView_dwv_hours, 0)
+        minutes = ta.getInteger(R.styleable.DigitalWatchView_dwv_minutes, 0)
+        seconds = ta.getInteger(R.styleable.DigitalWatchView_dwv_seconds, 0)
         blinkColons = ta.getBoolean(R.styleable.DigitalWatchView_dwv_blink_colons, false)
         ta.recycle()
 
-        backgroundView = DigitalView(context, backgroundColor, normalTextSize,
+        backgroundView = DigitalView(context, backgroundColorInt, normalTextSize,
                 showSeconds, secondsTextSize, showHours, showTwoDigits,
                 88, 88, 88).apply {
             if (!showBackground) gone()
             alpha = backgroundAlpha.clamp(0f, 1f)
         }
-        foregroundView = DigitalView(context, foregroundColor, normalTextSize,
+        foregroundView = DigitalView(context, foregroundColorInt, normalTextSize,
                 showSeconds, secondsTextSize, showHours, showTwoDigits,
                 hours, minutes, seconds).apply {
             gravity = Gravity.END
@@ -76,62 +91,88 @@ class DigitalWatchView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
+    fun getShowBackground() = showBackground
     fun setShowBackground(show: Boolean) {
+        showBackground = show
         if (show) backgroundView.show() else backgroundView.gone()
     }
 
+    @ColorInt
+    fun getBackgroundViewColorInt() = backgroundColorInt
+
     fun setBackgroundViewColorInt(@ColorInt color: Int) {
+        backgroundColorInt = color
         backgroundView.setColorInt(color)
     }
 
+    fun getBackgroundViewAlpha() = backgroundAlpha
     fun setBackgroundViewAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) {
+        backgroundAlpha = alpha
         backgroundView.alpha = alpha.clamp(0f, 1f)
     }
 
+    @ColorInt
+    fun getForegroundViewColorInt() = foregroundColorInt
+
     fun setForegroundViewColorInt(@ColorInt color: Int) {
+        foregroundColorInt = color
         foregroundView.setColorInt(color)
     }
 
+    fun getNormalTextSize() = normalTextSize
     fun setNormalTextSize(textSize: Float) {
+        normalTextSize = textSize
         backgroundView.setNormalTextSize(textSize)
         foregroundView.setNormalTextSize(textSize)
     }
 
+    fun getShowSeconds() = showSeconds
     fun setShowSeconds(show: Boolean) {
+        showSeconds = show
         backgroundView.setShowSeconds(show)
         foregroundView.setShowSeconds(show)
     }
 
+    fun getSecondsTextSize() = secondsTextSize
     fun setSecondsTextSize(textSize: Float) {
+        secondsTextSize = textSize
         backgroundView.setSecondsTextSize(textSize)
         foregroundView.setSecondsTextSize(textSize)
     }
 
+    fun getShowHours() = showHours
     fun setShowHours(show: Boolean) {
+        showHours = show
         backgroundView.setShowHours(show)
         foregroundView.setShowHours(show)
     }
 
+    fun getShowTwoDigits() = showTwoDigits
     fun setShowTwoDigits(show: Boolean) {
+        showTwoDigits = show
         foregroundView.setShowTwoDigits(show)
+        setTime(hours, minutes, seconds)
     }
 
     fun setTime(h: Int, m: Int, s: Int) {
         foregroundView.setTime(h, m, s)
     }
 
-    fun getHours(): Int = foregroundView.hours
+    fun getHours(): Int = hours
     fun setHours(h: Int) {
+        hours = h
         foregroundView.setHoursOnly(h)
     }
 
-    fun getMinutes(): Int = foregroundView.minutes
+    fun getMinutes(): Int = minutes
     fun setMinutes(m: Int) {
+        minutes = m
         foregroundView.setMinutesOnly(m)
     }
 
-    fun getSeconds(): Int = foregroundView.seconds
+    fun getSeconds(): Int = seconds
     fun setSeconds(s: Int) {
+        seconds = s
         foregroundView.setSecondsOnly(s)
     }
 
@@ -177,9 +218,9 @@ class DigitalWatchView @JvmOverloads constructor(
                               secondsTextSize: Float,
                               private var showHours: Boolean,
                               private var showTwoDigits: Boolean,
-                              var hours: Int,
-                              var minutes: Int,
-                              var seconds: Int
+                              hours: Int,
+                              minutes: Int,
+                              seconds: Int
     ) : LinearLayout(context) {
 
         companion object {
@@ -240,7 +281,6 @@ class DigitalWatchView @JvmOverloads constructor(
 
         fun setShowTwoDigits(show: Boolean) {
             showTwoDigits = show
-            setTime(hours, minutes, seconds)
         }
 
         fun setTime(h: Int, m: Int, s: Int) {
@@ -250,7 +290,6 @@ class DigitalWatchView @JvmOverloads constructor(
         }
 
         fun setHoursOnly(h: Int) {
-            hours = h
             if (showTwoDigits) {
                 hoursView.text = TWO_DIGITS_FORMAT.format(h)
             } else {
@@ -259,7 +298,6 @@ class DigitalWatchView @JvmOverloads constructor(
         }
 
         fun setMinutesOnly(m: Int) {
-            minutes = m
             if (!showTwoDigits && !showHours) {
                 minutesView.text = m.toString()
             } else {
@@ -268,7 +306,6 @@ class DigitalWatchView @JvmOverloads constructor(
         }
 
         fun setSecondsOnly(s: Int) {
-            seconds = s
             secondsView.text = TWO_DIGITS_FORMAT.format(s)
         }
 
