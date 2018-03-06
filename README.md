@@ -28,6 +28,28 @@ dependencies {
 ## Try
 Download a sample APK [here](https://github.com/DeweyReed/DigitalWatchView/releases/download/1.0/sample.apk)
 
+## Usage
+```
+<io.github.deweyreed.digitalwatchview.DigitalWatchView
+    android:id="@+id/digitalWatchView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:dwv_background_alpha="0.1"
+    app:dwv_background_color="@android:color/black"
+    app:dwv_blink_colons="true"
+    app:dwv_foreground_color="@android:color/holo_red_light"
+    app:dwv_hours="8"
+    app:dwv_minutes="23"
+    app:dwv_normal_text_size="24sp"
+    app:dwv_seconds="57"
+    app:dwv_seconds_text_size="12sp"
+    app:dwv_show_background="true"
+    app:dwv_show_hours="true"
+    app:dwv_show_seconds="true"
+    app:dwv_show_two_digits="false" />
+```
+
 ## Attributes
 
 |xml|method|type|default|meaning|
