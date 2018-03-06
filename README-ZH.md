@@ -67,6 +67,7 @@ dependencies {
 ||getHours|||获取小时|
 ||getMinutes|||获取分钟|
 ||getSeconds|||获取秒钟|
+||Other Getters|||每个setter都有其对应的getter|
 
 ## ..
 两个冒号使用的字体`digital_7_colon.ttf`是`digital_7.ttf`的子集。仅包含了一个冒号却占2.89KB空间。`digital_7_mono_nums.ttf`也是，十个数字占了5.44KB的空间。

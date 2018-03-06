@@ -71,6 +71,7 @@ Download a sample APK [here](https://github.com/DeweyReed/DigitalWatchView/relea
 ||getHours|||Return current hours|
 ||getMinutes|||Return current minutes|
 ||getSeconds|||Return current seconds|
+||Other Getters|||Every setter has its corresponding getter|
 
 ## ..
 `digital_7_colon.ttf` the two colons use is a subset font of `digital_7.ttf`. It simply includes one glyph(the colon) but takes 2.89KB space. So does `digital_7_mono_nums.ttf`, ten numbers glyphs take 5.44KB space.
