@@ -51,7 +51,7 @@ class DigitalWatchView @JvmOverloads constructor(
         backgroundAlpha = ta.getFloat(R.styleable.DigitalWatchView_dwv_background_alpha,
                 1f)
         foregroundColorInt = ta.getColor(R.styleable.DigitalWatchView_dwv_foreground_color,
-                color(android.R.color.holo_green_dark))
+                -1)
         normalTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_normal_text_size,
                 sp(18).toFloat())
         showSeconds = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_seconds,
@@ -323,7 +323,9 @@ class DigitalWatchView @JvmOverloads constructor(
                                    show: Boolean = true
         ): AppCompatTextView = AppCompatTextView(context).apply {
             typeface = ResourcesCompat.getFont(context, font)
-            setTextColor(textColor)
+            if (textColor != -1) {
+                setTextColor(textColor)
+            }
             setTextSize(textSize)
             if (!show) gone()
         }

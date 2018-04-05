@@ -129,7 +129,7 @@
                     android:layout_height="24dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
-                    android:background="@android:color/holo_green_dark" />
+                    android:background="#050505" />
             </LinearLayout>
 
             <LinearLayout
