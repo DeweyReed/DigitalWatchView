@@ -1,31 +1,40 @@
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DigitalWatchView-green.svg?style=flat)]( https://android-arsenal.com/details/1/6847)
+[![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
+
 # DigitalWatchView
+
 电子表控件
 
-![](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.gif?raw=true)
+![preview image](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.gif?raw=true)
 
 ## 安装
+
 Step 1. 在根build.gradle添加jitpack.io:
-```
+
+```Groovy
 allprojects {
-	repositories {
+    repositories {
         ...
-		maven { url 'https://jitpack.io' }
-	}
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
-Step 2.
-```
+
+Step 2. app build.gradle => [![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
+
+```Groovy
 dependencies {
-	implementation 'com.github.DeweyReed:DigitalWatchView:$version'
+    implementation 'com.github.DeweyReed:DigitalWatchView:$version'
 }
 ```
-[![](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
 
 ## Try
+
 在[这里下载](https://github.com/DeweyReed/DigitalWatchView/releases/download/1.0/sample.apk)示例APK
 
 ## 使用
-```
+
+```Kotlin
 <io.github.deweyreed.digitalwatchview.DigitalWatchView
     android:id="@+id/digitalWatchView"
     android:layout_width="wrap_content"
@@ -69,10 +78,12 @@ dependencies {
 ||getSeconds|||获取秒钟|
 ||Other Getters|||每个setter都有其对应的getter|
 
-## ..
+## =-=
+
 两个冒号使用的字体`digital_7_colon.ttf`是`digital_7.ttf`的子集。仅包含了一个冒号却占2.89KB空间。`digital_7_mono_nums.ttf`也是，十个数字占了5.44KB的空间。
 
 我自然很在意APK大小，但不清楚减小这两个字体占用大小的方法。需要有缘人的帮助！
 
 ## License
+
 [MIT License](https://github.com/DeweyReed/DigitalWatchView/blob/master/LICENSE)

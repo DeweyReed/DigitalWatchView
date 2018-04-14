@@ -1,35 +1,43 @@
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DigitalWatchView-green.svg?style=flat)]( https://android-arsenal.com/details/1/6847)
+[![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
+[![Translation-ZH](https://img.shields.io/badge/Translation-%E4%B8%AD%E6%96%87-red.svg)](https://github.com/DeweyReed/DigitalWatchView/blob/master/README-ZH.md#scrollhmspicker)
+
 # DigitalWatchView
-[:cn:](https://github.com/DeweyReed/DigitalWatchView/blob/master/README-ZH.md#scrollhmspicker)
 
 Just looks like your digital watch.
 
-![](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.gif?raw=true)
+![preview image](https://github.com/DeweyReed/DigitalWatchView/blob/master/image/preview.gif?raw=true)
 
 ## Install
+
 Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
-```
+
+```Groovy
 allprojects {
-	repositories {
+    repositories {
         ...
-		maven { url 'https://jitpack.io' }
-	}
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
-Step 2. Add the dependency
-```
+
+Step 2. Add the dependency => [![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
+
+```Groovy
 dependencies {
-	implementation 'com.github.DeweyReed:DigitalWatchView:$version'
+    implementation 'com.github.DeweyReed:DigitalWatchView:$version'
 }
 ```
-[![](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
 
 ## Try
+
 Download a sample APK [here](https://github.com/DeweyReed/DigitalWatchView/releases/download/1.0/sample.apk)
 
 ## Usage
-```
+
+```Kotlin
 <io.github.deweyreed.digitalwatchview.DigitalWatchView
     android:id="@+id/digitalWatchView"
     android:layout_width="wrap_content"
@@ -73,10 +81,12 @@ Download a sample APK [here](https://github.com/DeweyReed/DigitalWatchView/relea
 ||getSeconds|||Return current seconds|
 ||Other Getters|||Every setter has its corresponding getter|
 
-## ..
+## =-=
+
 `digital_7_colon.ttf` the two colons use is a subset font of `digital_7.ttf`. It simply includes one glyph(the colon) but takes 2.89KB space. So does `digital_7_mono_nums.ttf`, ten numbers glyphs take 5.44KB space.
 
 I do care about APK size but I don't know if there is a way to reduce these two fonts size. I need help!!
 
 ## License
+
 [MIT License](https://github.com/DeweyReed/DigitalWatchView/blob/master/LICENSE)
