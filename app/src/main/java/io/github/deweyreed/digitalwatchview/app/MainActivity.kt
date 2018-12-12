@@ -10,7 +10,7 @@ import org.jetbrains.anko.sp
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(),
-        ColorPickerDialogListener, DiscreteSeekBar.OnProgressChangeListener {
+    ColorPickerDialogListener, DiscreteSeekBar.OnProgressChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,8 +77,10 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
-        arrayOf(seekBackgroundAlpha, seekNormalTextSize, seekSecondsTextSize,
-                seekHours, seekMinutes, seekSeconds).forEach {
+        arrayOf(
+            seekBackgroundAlpha, seekNormalTextSize, seekSecondsTextSize,
+            seekHours, seekMinutes, seekSeconds
+        ).forEach {
             it.setOnProgressChangeListener(this@MainActivity)
         }
 

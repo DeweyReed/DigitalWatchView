@@ -18,8 +18,8 @@ import android.widget.LinearLayout
  */
 
 class DigitalWatchView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : FrameLayout(context, attrs, defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val backgroundView: DigitalView
     private val foregroundView: DigitalView
@@ -44,39 +44,61 @@ class DigitalWatchView @JvmOverloads constructor(
 
     init {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.DigitalWatchView, 0, 0)
-        showBackground = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_background,
-                false)
-        backgroundColorInt = ta.getColor(R.styleable.DigitalWatchView_dwv_background_color,
-                color(android.R.color.darker_gray))
-        backgroundAlpha = ta.getFloat(R.styleable.DigitalWatchView_dwv_background_alpha,
-                1f)
-        foregroundColorInt = ta.getColor(R.styleable.DigitalWatchView_dwv_foreground_color,
-                -1)
-        normalTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_normal_text_size,
-                sp(18).toFloat())
-        showSeconds = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_seconds,
-                true)
-        secondsTextSize = ta.getDimension(R.styleable.DigitalWatchView_dwv_seconds_text_size,
-                sp(18).toFloat())
-        showHours = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_hours,
-                true)
-        showTwoDigits = ta.getBoolean(R.styleable.DigitalWatchView_dwv_show_two_digits,
-                true)
+        showBackground = ta.getBoolean(
+            R.styleable.DigitalWatchView_dwv_show_background,
+            false
+        )
+        backgroundColorInt = ta.getColor(
+            R.styleable.DigitalWatchView_dwv_background_color,
+            color(android.R.color.darker_gray)
+        )
+        backgroundAlpha = ta.getFloat(
+            R.styleable.DigitalWatchView_dwv_background_alpha,
+            1f
+        )
+        foregroundColorInt = ta.getColor(
+            R.styleable.DigitalWatchView_dwv_foreground_color,
+            -1
+        )
+        normalTextSize = ta.getDimension(
+            R.styleable.DigitalWatchView_dwv_normal_text_size,
+            sp(18).toFloat()
+        )
+        showSeconds = ta.getBoolean(
+            R.styleable.DigitalWatchView_dwv_show_seconds,
+            true
+        )
+        secondsTextSize = ta.getDimension(
+            R.styleable.DigitalWatchView_dwv_seconds_text_size,
+            sp(18).toFloat()
+        )
+        showHours = ta.getBoolean(
+            R.styleable.DigitalWatchView_dwv_show_hours,
+            true
+        )
+        showTwoDigits = ta.getBoolean(
+            R.styleable.DigitalWatchView_dwv_show_two_digits,
+            true
+        )
         hours = ta.getInteger(R.styleable.DigitalWatchView_dwv_hours, 0)
         minutes = ta.getInteger(R.styleable.DigitalWatchView_dwv_minutes, 0)
         seconds = ta.getInteger(R.styleable.DigitalWatchView_dwv_seconds, 0)
         blinkColons = ta.getBoolean(R.styleable.DigitalWatchView_dwv_blink_colons, false)
         ta.recycle()
 
-        backgroundView = DigitalView(context, backgroundColorInt, normalTextSize,
-                showSeconds, secondsTextSize, showHours, showTwoDigits,
-                88, 88, 88).apply {
+        backgroundView = DigitalView(
+            context, backgroundColorInt, normalTextSize,
+            showSeconds, secondsTextSize, showHours, showTwoDigits,
+            88, 88, 88
+        ).apply {
             if (!showBackground) gone()
             alpha = backgroundAlpha.clamp(0f, 1f)
         }
-        foregroundView = DigitalView(context, foregroundColorInt, normalTextSize,
-                showSeconds, secondsTextSize, showHours, showTwoDigits,
-                hours, minutes, seconds).apply {
+        foregroundView = DigitalView(
+            context, foregroundColorInt, normalTextSize,
+            showSeconds, secondsTextSize, showHours, showTwoDigits,
+            hours, minutes, seconds
+        ).apply {
             gravity = Gravity.END
         }
 
@@ -211,16 +233,17 @@ class DigitalWatchView @JvmOverloads constructor(
         }
     }
 
-    private class DigitalView(context: Context,
-                              @ColorInt private val textColor: Int,
-                              normalTextSize: Float,
-                              showSeconds: Boolean,
-                              secondsTextSize: Float,
-                              private var showHours: Boolean,
-                              private var showTwoDigits: Boolean,
-                              hours: Int,
-                              minutes: Int,
-                              seconds: Int
+    private class DigitalView(
+        context: Context,
+        @ColorInt private val textColor: Int,
+        normalTextSize: Float,
+        showSeconds: Boolean,
+        secondsTextSize: Float,
+        private var showHours: Boolean,
+        private var showTwoDigits: Boolean,
+        hours: Int,
+        minutes: Int,
+        seconds: Int
     ) : LinearLayout(context) {
 
         companion object {
@@ -236,18 +259,34 @@ class DigitalWatchView @JvmOverloads constructor(
         init {
             orientation = LinearLayout.HORIZONTAL
 
-            hoursView = createTextView(context, R.font.digital_7_mono_nums, normalTextSize, showHours)
-            colonHmView = createTextView(context, R.font.digital_7_colon, normalTextSize, showHours).apply {
+            hoursView =
+                    createTextView(context, R.font.digital_7_mono_nums, normalTextSize, showHours)
+            colonHmView = createTextView(
+                context,
+                R.font.digital_7_colon,
+                normalTextSize,
+                showHours
+            ).apply {
                 text = ":"
             }
             minutesView = createTextView(context, R.font.digital_7_mono_nums, normalTextSize)
-            colonMsView = createTextView(context, R.font.digital_7_colon, secondsTextSize, showSeconds).apply {
+            colonMsView = createTextView(
+                context,
+                R.font.digital_7_colon,
+                secondsTextSize,
+                showSeconds
+            ).apply {
                 text = ":"
             }
-            secondsView = createTextView(context, R.font.digital_7_mono_nums, secondsTextSize, showSeconds)
+            secondsView = createTextView(
+                context,
+                R.font.digital_7_mono_nums,
+                secondsTextSize,
+                showSeconds
+            )
 
             arrayOf(hoursView, colonHmView, minutesView, colonMsView, secondsView)
-                    .forEach { addView(it) }
+                .forEach { addView(it) }
 
             setTime(hours, minutes, seconds)
         }
@@ -317,10 +356,11 @@ class DigitalWatchView @JvmOverloads constructor(
             arrayOf(colonHmView, colonMsView).forEach { it.alpha = 0f }
         }
 
-        private fun createTextView(context: Context,
-                                   @FontRes font: Int,
-                                   textSize: Float,
-                                   show: Boolean = true
+        private fun createTextView(
+            context: Context,
+            @FontRes font: Int,
+            textSize: Float,
+            show: Boolean = true
         ): AppCompatTextView = AppCompatTextView(context).apply {
             typeface = ResourcesCompat.getFont(context, font)
             if (textColor != -1) {

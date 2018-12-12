@@ -77,8 +77,8 @@
                     android:id="@+id/imageBackgroundColor"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
@@ -127,8 +127,8 @@
                     android:id="@+id/imageForegroundColor"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
                     android:background="#050505" />
             </LinearLayout>
 
