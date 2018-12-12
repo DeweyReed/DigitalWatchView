@@ -32,7 +32,8 @@ dependencies {
     implementation libs.support_v4
 
     implementation 'org.adw.library:discrete-seekbar:1.0.1'
-    implementation 'com.jaredrummler:colorpicker:1.0.5'
+    //noinspection GradleDependency
+    implementation 'com.jaredrummler:colorpicker:1.0.2'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
 
