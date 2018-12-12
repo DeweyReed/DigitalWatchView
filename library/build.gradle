@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    api libs.kotlin_stdlib_jdk7
-    compileOnly libs.support_appcompat_v7
+    implementation libs.kotlin_stdlib_jdk7
+    implementation libs.support_appcompat_v7
 }
