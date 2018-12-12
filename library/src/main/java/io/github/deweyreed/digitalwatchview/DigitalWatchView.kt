@@ -6,7 +6,6 @@ import android.os.SystemClock
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.support.annotation.FontRes
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
@@ -363,7 +362,7 @@ class DigitalWatchView @JvmOverloads constructor(
             textSize: Float,
             show: Boolean = true
         ): AppCompatTextView = AppCompatTextView(context).apply {
-            typeface = ResourcesCompat.getFont(context, font)
+            typeface = context.getFontCompat(font)
             setTextColor(textColor)
             setTextSize(textSize)
             if (!show) gone()
