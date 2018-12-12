@@ -1,6 +1,7 @@
 package io.github.deweyreed.digitalwatchview
 
 import android.content.Context
+import android.graphics.Color
 import android.os.SystemClock
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
@@ -58,7 +59,7 @@ class DigitalWatchView @JvmOverloads constructor(
         )
         foregroundColorInt = ta.getColor(
             R.styleable.DigitalWatchView_dwv_foreground_color,
-            -1
+            Color.BLACK
         )
         normalTextSize = ta.getDimension(
             R.styleable.DigitalWatchView_dwv_normal_text_size,
@@ -363,9 +364,7 @@ class DigitalWatchView @JvmOverloads constructor(
             show: Boolean = true
         ): AppCompatTextView = AppCompatTextView(context).apply {
             typeface = ResourcesCompat.getFont(context, font)
-            if (textColor != -1) {
-                setTextColor(textColor)
-            }
+            setTextColor(textColor)
             setTextSize(textSize)
             if (!show) gone()
         }
