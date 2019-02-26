@@ -1,6 +1,5 @@
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DigitalWatchView-green.svg?style=flat)]( https://android-arsenal.com/details/1/6847)
 [![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
-[![Translation-ZH](https://img.shields.io/badge/Translation-%E4%B8%AD%E6%96%87-red.svg)](https://github.com/DeweyReed/DigitalWatchView/blob/master/README-ZH.md#scrollhmspicker)
 
 # DigitalWatchView
 
@@ -30,6 +29,8 @@ dependencies {
     implementation 'com.github.DeweyReed:DigitalWatchView:$version'
 }
 ```
+
+**1.0.2 is the last version using the support library.**
 
 ## Try
 
