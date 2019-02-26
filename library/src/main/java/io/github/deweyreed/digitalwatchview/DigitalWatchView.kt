@@ -3,10 +3,10 @@ package io.github.deweyreed.digitalwatchview
 import android.content.Context
 import android.graphics.Color
 import android.os.SystemClock
-import android.support.annotation.ColorInt
-import android.support.annotation.FloatRange
-import android.support.annotation.FontRes
-import android.support.v7.widget.AppCompatTextView
+import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
+import androidx.annotation.FontRes
+import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.FrameLayout

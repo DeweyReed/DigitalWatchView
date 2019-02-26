@@ -1,8 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.DeweyReed'
+
 android {
     compileSdkVersion versions.compileSdk
 
@@ -12,16 +14,9 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
 }
 
 dependencies {
     implementation libs.kotlin_stdlib_jdk7
-    implementation libs.support_appcompat_v7
+    implementation libs.appcompat
 }
