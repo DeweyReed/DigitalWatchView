@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dwv_id_hours" type="id" />
+    <item name="dwv_id_colon_hours_minutes" type="id" />
+    <item name="dwv_id_minutes" type="id" />
+    <item name="dwv_id_colon_minutes_seconds" type="id" />
+    <item name="dwv_id_seconds" type="id" />
+</resources>

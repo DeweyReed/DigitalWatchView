@@ -3,14 +3,16 @@ package io.github.deweyreed.digitalwatchview
 import android.content.Context
 import android.graphics.Color
 import android.os.SystemClock
+import android.util.AttributeSet
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.annotation.FontRes
 import androidx.appcompat.widget.AppCompatTextView
-import android.util.AttributeSet
-import android.view.Gravity
-import android.widget.FrameLayout
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import kotlin.math.max
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 /**
@@ -18,16 +20,19 @@ import android.widget.LinearLayout
  */
 
 class DigitalWatchView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+    context: Context,
+    attrs: AttributeSet? = null
+) : FrameLayout(context, attrs) {
 
     private val backgroundView: DigitalView
     private val foregroundView: DigitalView
 
     private var showBackground = false
+
     @ColorInt
     private var backgroundColorInt = -1
     private var backgroundAlpha = 1f
+
     @ColorInt
     private var foregroundColorInt = -1
     private var normalTextSize = 1f
@@ -98,9 +103,7 @@ class DigitalWatchView @JvmOverloads constructor(
             context, foregroundColorInt, normalTextSize,
             showSeconds, secondsTextSize, showHours, showTwoDigits,
             hours, minutes, seconds
-        ).apply {
-            gravity = Gravity.END
-        }
+        )
 
         addView(backgroundView)
         addView(foregroundView)
@@ -228,7 +231,7 @@ class DigitalWatchView @JvmOverloads constructor(
             }
             val endTime = SystemClock.elapsedRealtime()
             // Try to maintain a consistent period of time between redraws.
-            val delay = Math.max(0, startTime + 100 - endTime)
+            val delay = max(0, startTime + 100 - endTime)
             this@DigitalWatchView.postDelayed(this, delay)
         }
     }
@@ -244,55 +247,114 @@ class DigitalWatchView @JvmOverloads constructor(
         hours: Int,
         minutes: Int,
         seconds: Int
-    ) : LinearLayout(context) {
+    ) : ConstraintLayout(context) {
 
         companion object {
             private const val TWO_DIGITS_FORMAT = "%02d"
         }
 
-        private val hoursView: AppCompatTextView
-        private val colonHmView: AppCompatTextView
-        private val minutesView: AppCompatTextView
-        private val colonMsView: AppCompatTextView
-        private val secondsView: AppCompatTextView
+        private val hoursView: TextView
+        private val colonHmView: TextView
+        private val minutesView: TextView
+        private val colonMsView: TextView
+        private val secondsView: TextView
+
+        private val allViews: Array<TextView>
 
         init {
-            orientation = LinearLayout.HORIZONTAL
 
-            hoursView =
-                    createTextView(context, R.font.digital_7_mono_nums, normalTextSize, showHours)
-            colonHmView = createTextView(
-                context,
-                R.font.digital_7_colon,
-                normalTextSize,
-                showHours
-            ).apply {
-                text = ":"
+            fun View.add(f: LayoutParams.() -> Unit) {
+                addView(
+                    this,
+                    LayoutParams(
+                        LayoutParams.MATCH_CONSTRAINT,
+                        LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        matchConstraintDefaultWidth = LayoutParams.MATCH_CONSTRAINT_WRAP
+                        constrainedWidth = true
+                        topToTop = LayoutParams.PARENT_ID
+                        bottomToBottom = LayoutParams.PARENT_ID
+                        f.invoke(this)
+                    }
+                )
             }
-            minutesView = createTextView(context, R.font.digital_7_mono_nums, normalTextSize)
-            colonMsView = createTextView(
-                context,
-                R.font.digital_7_colon,
-                secondsTextSize,
-                showSeconds
+
+            hoursView = createTextView(
+                context = context,
+                font = R.font.digital_7_mono_nums,
+                textSize = normalTextSize,
+                show = showHours
             ).apply {
+                id = R.id.dwv_id_hours
+                add {
+                    startToStart = LayoutParams.PARENT_ID
+                    endToStart = R.id.dwv_id_colon_hours_minutes
+                    horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                }
+            }
+            colonHmView = createTextView(
+                context = context,
+                font = R.font.digital_7_colon,
+                textSize = normalTextSize,
+                show = showHours
+            ).apply {
+                id = R.id.dwv_id_colon_hours_minutes
                 text = ":"
+                add {
+                    startToEnd = R.id.dwv_id_hours
+                    endToStart = R.id.dwv_id_minutes
+                }
+            }
+            minutesView = createTextView(
+                context = context,
+                font = R.font.digital_7_mono_nums,
+                textSize = normalTextSize
+            ).apply {
+                id = R.id.dwv_id_minutes
+                add {
+                    startToEnd = R.id.dwv_id_colon_hours_minutes
+                    endToStart = R.id.dwv_id_colon_minutes_seconds
+                }
+            }
+            colonMsView = createTextView(
+                context = context,
+                font = R.font.digital_7_colon,
+                textSize = secondsTextSize,
+                show = showSeconds
+            ).apply {
+                id = R.id.dwv_id_colon_minutes_seconds
+                text = ":"
+                add {
+                    startToEnd = R.id.dwv_id_minutes
+                    endToStart = R.id.dwv_id_seconds
+                    topToTop = LayoutParams.UNSET
+                    bottomToBottom = LayoutParams.UNSET
+                    baselineToBaseline = R.id.dwv_id_minutes
+                }
             }
             secondsView = createTextView(
-                context,
-                R.font.digital_7_mono_nums,
-                secondsTextSize,
-                showSeconds
-            )
+                context = context,
+                font = R.font.digital_7_mono_nums,
+                textSize = secondsTextSize,
+                show = showSeconds
+            ).apply {
+                id = R.id.dwv_id_seconds
+                add {
+                    startToEnd = R.id.dwv_id_colon_minutes_seconds
+                    endToEnd = LayoutParams.PARENT_ID
+                    topToTop = LayoutParams.UNSET
+                    bottomToBottom = LayoutParams.UNSET
+                    baselineToBaseline = R.id.dwv_id_minutes
+                }
+            }
 
-            arrayOf(hoursView, colonHmView, minutesView, colonMsView, secondsView)
-                .forEach { addView(it) }
+            allViews = arrayOf(hoursView, colonHmView, minutesView, colonMsView, secondsView)
 
             setTime(hours, minutes, seconds)
         }
 
         fun setColorInt(@ColorInt color: Int) {
-            arrayOf(hoursView, colonHmView, minutesView, colonMsView, secondsView).forEach {
+            allViews.forEach {
                 it.setTextColor(color)
             }
         }
@@ -332,7 +394,7 @@ class DigitalWatchView @JvmOverloads constructor(
             if (showTwoDigits) {
                 hoursView.text = TWO_DIGITS_FORMAT.format(h)
             } else {
-                hoursView.text = h.toString()
+                hoursView.text = if (h < 10) " $h" else h.toString()
             }
         }
 
@@ -361,10 +423,15 @@ class DigitalWatchView @JvmOverloads constructor(
             @FontRes font: Int,
             textSize: Float,
             show: Boolean = true
-        ): AppCompatTextView = AppCompatTextView(context).apply {
+        ): TextView = AppCompatTextView(context).apply {
             typeface = context.getFontCompat(font)
             setTextColor(textColor)
             setTextSize(textSize)
+            maxLines = 1
+            // TextViewCompat.setAutoSizeTextTypeWithDefaults(
+            //     this,
+            //     TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM
+            // )
             if (!show) gone()
         }
     }
