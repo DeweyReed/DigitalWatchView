@@ -27,13 +27,11 @@ dependencies {
 
     implementation project(':library')
     implementation libs.kotlin_stdlib_jdk7
-    implementation libs.kotlin_anko
     implementation libs.appcompat
 
     implementation 'org.adw.library:discrete-seekbar:1.0.1'
     //noinspection GradleDependency
     implementation 'com.jaredrummler:colorpicker:1.1.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
 }

@@ -1,13 +1,13 @@
 package io.github.deweyreed.digitalwatchview.app
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import kotlinx.android.synthetic.main.activity_main.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-import org.jetbrains.anko.sp
-import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(),
     ColorPickerDialogListener, DiscreteSeekBar.OnProgressChangeListener {
@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity(),
         if (fromUser) {
             when (seekBar?.id) {
                 R.id.seekBackgroundAlpha -> digitalWatchView.setBackgroundViewAlpha(value / 100f)
-                R.id.seekNormalTextSize -> digitalWatchView.setNormalTextSize(sp(value).toFloat())
-                R.id.seekSecondsTextSize -> digitalWatchView.setSecondsTextSize(sp(value).toFloat())
+                R.id.seekNormalTextSize -> digitalWatchView.setNormalTextSize(sp(value))
+                R.id.seekSecondsTextSize -> digitalWatchView.setSecondsTextSize(sp(value))
                 R.id.seekHours -> digitalWatchView.setHours(value)
                 R.id.seekMinutes -> digitalWatchView.setMinutes(value)
                 R.id.seekSeconds -> digitalWatchView.setSeconds(value)
@@ -84,6 +84,12 @@ class MainActivity : AppCompatActivity(),
             it.setOnProgressChangeListener(this@MainActivity)
         }
 
-        btnExample.setOnClickListener { startActivity<SecondActivity>() }
+        btnExample.setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+        }
     }
 }
+
+val Context.scaledDensity: Float get() = resources.displayMetrics.scaledDensity
+
+fun Context.sp(value: Int): Float = value * scaledDensity
