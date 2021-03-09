@@ -1,6 +1,10 @@
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DigitalWatchView-green.svg?style=flat)]( https://android-arsenal.com/details/1/6847)
 [![newest version](https://jitpack.io/v/DeweyReed/DigitalWatchView.svg)](https://jitpack.io/#DeweyReed/DigitalWatchView)
 
+## Deprecated
+
+Since [a TextView with a custom font works perfectly](https://github.com/DeweyReed/DigitalWatchView/issues/2), this library is of little use.
+
 # DigitalWatchView
 
 Just looks like your digital watch.
